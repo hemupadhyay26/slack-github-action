@@ -55,6 +55,10 @@ module.exports = async function slackSend(core) {
 
     if (payload) {
       try {
+        // if file is pass throught the github action variable or secrets
+        const context = { github: github.context, env: process.env };
+        const payloadString = payload.replaceAll('${{', '{{');
+        payload = markup.up(payloadString, context);
         // confirm it is valid json
         payload = JSON.parse(payload);
       } catch (e) {
