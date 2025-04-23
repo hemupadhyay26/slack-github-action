@@ -157,6 +157,11 @@ export default class Content {
       return input;
     }
     const template = input.replace(/\$\{\{/g, "{{"); // swap ${{ for {{
+
+    console.log("template", template);
+    console.log("github", github.context);
+    console.log("env", process.env)
+
     const context = {
       env: process.env,
       github: github.context,
